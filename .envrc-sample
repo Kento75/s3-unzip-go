@@ -1,0 +1,2 @@
+export ZIPPED_ARTIFACT_BUCKET="hogehoge1-artifact-xxxxxxxx-kento"
+export UNZIPPED_ARTIFACT_BUCKET="hogehoge2-artifact-xxxxxxxx-kento"
