@@ -9,12 +9,12 @@ import (
 
 	"github.com/Kento75/s3-unzip-go/s3"
 	"github.com/Kento75/s3-unzip-go/zip"
-	"github.com/aws/aws-lambda-go/aws"
-	"github.com/aws/aws-lambda-go/aws/endpoints"
-	"github.com/aws/aws-lambda-go/aws/session"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-lambda-go/lambdacontext"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/endpoints"
+	"github.com/aws/aws-sdk-go/aws/session"
 )
 
 const (
@@ -37,15 +37,14 @@ var (
 )
 
 func init() {
-	destBucket = os.getenv("UNZIPPED_ARTIFACT_BUCKET")
+	destBucket = os.Getenv("UNZIPPED_ARTIFACT_BUCKET")
 }
 
 func main() {
 	lambda.Start(handler)
 }
-
 func handler(ctx context.Context, s3Event events.S3Event) error {
-	if lc, ok = lambdacontext.FromContext(ctx); ok {
+	if lc, ok := lambdacontext.FromContext(ctx); ok {
 		log.Printf("AwsRequestID: %s", lc.AwsRequestID)
 	}
 
@@ -64,10 +63,10 @@ func handler(ctx context.Context, s3Event events.S3Event) error {
 	// AWS接続情報の初期化
 	// 初期化しない場合、~/.aws/credentialsが利用されるため
 	sess := session.Must(session.NewSession(&aws.Config{
-		Region: aws.String(region)
+		Region: aws.String(region),
 	}))
 
-	downloader := s3.NewDownloader(sess, bucket, key, zipContentPath + tempZip)
+	downloader := s3.NewDownloader(sess, bucket, key, zipContentPath+tempZip)
 	downloadedZipPath, err := downloader.Download()
 
 	// ダウンロード失敗時

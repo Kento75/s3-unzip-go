@@ -18,7 +18,7 @@ type Uploader struct {
 	dest    string
 }
 
-func NewUploader(s *session, src string, dest string) *Uploader {
+func NewUploader(s *session.Session, src string, dest string) *Uploader {
 	return &Uploader{
 		manager: *s3manager.NewUploader(s),
 		src:     src,
@@ -36,7 +36,7 @@ func (u Uploader) Upload() error {
 				return err
 			}
 
-			if info.isDir() {
+			if info.IsDir() {
 				return nil
 			}
 

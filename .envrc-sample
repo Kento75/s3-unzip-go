@@ -1,3 +1,5 @@
 export GOROOT=$GOPATH/src/github.com/$USER/s3-unzip-go
-export ZIPPED_ARTIFACT_BUCKET="hogehoge1-artifact-xxxxxxxx-kento"
-export UNZIPPED_ARTIFACT_BUCKET="hogehoge2-artifact-xxxxxxxx-kento"
+
+# テストで使用するS3バケットの名前
+export ZIPPED_ARTIFACT_BUCKEAT="zipped-artifact-xxxxxxxx-kento75"
+export UNZIPPED_ARTIFACT_BUCKEAT="unzipped-artifact-xxxxxxxx-kento75"

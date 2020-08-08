@@ -17,7 +17,7 @@ type Downloader struct {
 	dest    string
 }
 
-func NewDownloader() *Downloader {
+func NewDownloader(s *session.Session, bucket, key, dest string) *Downloader {
 	return &Downloader{
 		manager: *s3manager.NewDownloader(s),
 		bucket:  bucket,
